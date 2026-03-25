@@ -1,0 +1,36 @@
+{
+  "milestones": [
+    {
+      "month": 2,
+      "social": ["Smiles at you", "Calms down when spoken to or picked up", "Looks at your face"],
+      "communication": ["Makes sounds other than crying", "Reacts to loud sounds"],
+      "cognitive": ["Watches you as you move", "Looks at a toy for several seconds"],
+      "physical": ["Holds head up when on tummy", "Moves both arms and both legs", "Opens hands briefly"],
+      "vaccines": ["HepB (2nd dose)", "DTaP", "Hib", "Polio (IPV)", "PCV", "Rotavirus (RV)"]
+    },
+    {
+      "month": 4,
+      "social": ["Smiles on their own to get your attention", "Chuckles (not yet a full laugh)"],
+      "communication": ["Makes sounds like 'oooo', 'aahh'", "Turns head towards the sound of your voice"],
+      "cognitive": ["If hungry, opens mouth when seeing breast or bottle", "Looks at their hands with interest"],
+      "physical": ["Holds head steady without support", "Holds a toy when you put it in their hand", "Swipes at dangling toys", "Brings hands to mouth"],
+      "vaccines": ["DTaP", "Hib", "Polio (IPV)", "PCV", "Rotavirus (RV)"]
+    },
+    {
+      "month": 6,
+      "social": ["Knows familiar people", "Likes to look at themselves in a mirror", "Laughs"],
+      "communication": ["Takes turns making sounds with you", "Blows 'raspberries' (sticks tongue out and blows)", "Makes squealing noises"],
+      "cognitive": ["Puts things in mouth to explore them", "Reaches to grab a toy they want", "Closes lips to show they don't want more food"],
+      "physical": ["Rolls from tummy to back", "Pushes up with straight arms when on tummy", "Leans on hands to support themselves when sitting"],
+      "vaccines": ["HepB (3rd dose)", "DTaP", "Hib", "Polio (IPV)", "PCV", "Rotavirus (RV)", "Flu (Annual)"]
+    },
+    {
+      "month": 9,
+      "social": ["Is shy, clingy, or fearful around strangers", "Shows several facial expressions", "Smiles or laughs when you play peek-a-boo"],
+      "communication": ["Makes different sounds like 'mamamama' and 'babababa'", "Lifts arms to be picked up"],
+      "cognitive": ["Looks for objects when dropped out of sight", "Bangs two things together"],
+      "physical": ["Gets to a sitting position by themselves", "Sits without support", "Pulls up to a stand", "Crawls"],
+      "vaccines": ["None standard (Catch-up if missed)"]
+    }
+  ]
+}
