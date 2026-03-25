@@ -41,17 +41,42 @@ class MilestoneMatcherTool implements IMcpTool {
         }
 
         const birthDate = parseISO(patient.birthDate);
-        const ageInMonths = differenceInMonths(new Date(), birthDate);
+        let ageInMonths = differenceInMonths(new Date(), birthDate);
+        let adjustedAgeMonths = ageInMonths;
+        let isPremature = false;
+
+        // Fetch Conditions to check for prematurity
+        const conditionBundle = await FhirClientInstance.search(req, "Condition", [`patient=${patientId}`]);
+        if (conditionBundle && conditionBundle.entry) {
+          for (const entry of conditionBundle.entry) {
+            const condition = entry.resource as fhirR4.Condition;
+            const display = condition.code?.coding?.[0]?.display?.toLowerCase() || condition.code?.text?.toLowerCase() || "";
+            if (display.includes("premature") || display.includes("preterm")) {
+              isPremature = true;
+              // For hackathon MVP: we assume 8 weeks (2 months) premature as a standard mock.
+              adjustedAgeMonths -= 2;
+              if (adjustedAgeMonths < 0) adjustedAgeMonths = 0;
+              break;
+            }
+          }
+        }
         
+        // Find closest milestone month <= adjustedAgeMonths
         let expectedMilestones = cdcData.milestones[0];
         for (const ms of cdcData.milestones) {
-          if (ms.month <= ageInMonths) {
+          if (ms.month <= adjustedAgeMonths) {
             expectedMilestones = ms;
           }
         }
 
         let responseText = `### Developmental Milestone Evaluation for Patient ${patientId}\n\n`;
-        responseText += `**Current Age:** ${ageInMonths} months\n`;
+        if (isPremature) {
+          responseText += `🚨 **Prematurity Detected in FHIR Record.** Applying corrected age for developmental targets.\n\n`;
+          responseText += `**Chronological Age:** ${ageInMonths} months\n`;
+          responseText += `**Adjusted/Corrected Age:** ${adjustedAgeMonths} months\n`;
+        } else {
+          responseText += `**Current Age:** ${ageInMonths} months\n`;
+        }
         responseText += `**Milestone Target:** ${expectedMilestones.month} months\n\n`;
         
         responseText += `#### Expected Target Milestones:\n`;
@@ -67,7 +92,7 @@ class MilestoneMatcherTool implements IMcpTool {
           responseText += `- None recorded.\n`;
         }
 
-        responseText += `\n*Note: Hackathon MVP. Preemie adjusted age logic and NLP behavioral mapping will be integrated in v2.*`;
+        responseText += `\n*Note: Hackathon MVP. Adjusted age logic has been activated. NLP behavioral mapping will be integrated in v3.*`;
 
         return McpUtilities.createTextResponse(responseText);
       }
