@@ -17,6 +17,9 @@ switch (env) {
     break;
   default:
     allowedHosts.push("localhost");
+    allowedHosts.push("127.0.0.1");
+    // Also add the localtunnel domain so it doesn't get blocked
+    allowedHosts.push("tired-walls-study.loca.lt");
 }
 
 const app = createMcpExpressApp({
