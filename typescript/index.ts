@@ -20,6 +20,7 @@ switch (env) {
     allowedHosts.push("127.0.0.1");
     // Also add the localtunnel domain so it doesn't get blocked
     allowedHosts.push("tired-walls-study.loca.lt");
+    allowedHosts.push("tristan-unrhythmic-caperingly.ngrok-free.dev");
 }
 
 const app = createMcpExpressApp({
